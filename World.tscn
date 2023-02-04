@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Boss.tscn" type="PackedScene" id=2]
 
 [node name="World" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 81, 64 )
+[node name="Entities" type="YSort" parent="."]
+
+[node name="Boss" parent="Entities" instance=ExtResource( 2 )]
+position = Vector2( 88, 80 )
+
+[node name="Player" parent="Entities" instance=ExtResource( 1 )]
+position = Vector2( 88, 144 )

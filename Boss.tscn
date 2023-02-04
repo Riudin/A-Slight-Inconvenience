@@ -1,0 +1,254 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://roboter_boss-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://roboter_boss_arms-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Boss.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.0
+height = 8.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "AttackEnd"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Body/Arms:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 50, 51, 52, 53, 54, 55, 56 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_AttackEnd_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "AttackStart"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Body/Arms:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 38, 39, 40, 41, 42, 43, 44, 45 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_projectile"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Attacking"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Body/Arms:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 46, 47 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Idle"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Body/Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Body/Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 19 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Walk"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Body/Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 19, 20, 21, 22, 23, 24, 25, 26 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "AttackEnd"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "AttackStart"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Attacking"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachine" id=19]
+states/AttackEnd/node = SubResource( 8 )
+states/AttackEnd/position = Vector2( 707, 75 )
+states/AttackStart/node = SubResource( 9 )
+states/AttackStart/position = Vector2( 348, 75 )
+states/Attacking/node = SubResource( 10 )
+states/Attacking/position = Vector2( 527, 75 )
+states/Idle/node = SubResource( 11 )
+states/Idle/position = Vector2( 527, 170 )
+states/Walk/node = SubResource( 12 )
+states/Walk/position = Vector2( 707, 170 )
+transitions = [ "Idle", "Walk", SubResource( 13 ), "Walk", "Idle", SubResource( 14 ), "Idle", "AttackStart", SubResource( 15 ), "AttackEnd", "Idle", SubResource( 18 ), "AttackStart", "Attacking", SubResource( 21 ), "Attacking", "AttackEnd", SubResource( 22 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=20]
+
+[node name="Boss" type="KinematicBody2D"]
+script = ExtResource( 3 )
+
+[node name="Body" type="Sprite" parent="."]
+position = Vector2( 0, -19 )
+texture = ExtResource( 1 )
+hframes = 8
+vframes = 2
+frame = 8
+
+[node name="Arms" type="Sprite" parent="Body"]
+texture = ExtResource( 2 )
+hframes = 19
+vframes = 3
+frame = 19
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationTree")
+anims/AttackEnd = SubResource( 2 )
+anims/AttackStart = SubResource( 3 )
+anims/Attacking = SubResource( 4 )
+anims/Idle = SubResource( 5 )
+anims/RESET = SubResource( 6 )
+anims/Walk = SubResource( 7 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 19 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 20 )
+
+[node name="ProjectileOrigin" type="Position2D" parent="."]
+position = Vector2( -8, -17 )
+
+[node name="ProjectileDirection" type="Position2D" parent="ProjectileOrigin"]
+position = Vector2( 0, 2 )
