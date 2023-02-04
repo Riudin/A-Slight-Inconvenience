@@ -1,8 +1,10 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://roboter_boss-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://roboter_boss_arms-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Boss.gd" type="Script" id=3]
+[ext_resource path="res://Laser.tscn" type="PackedScene" id=4]
+[ext_resource path="res://LaserIndicator.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -252,3 +254,10 @@ position = Vector2( -8, -17 )
 
 [node name="ProjectileDirection" type="Position2D" parent="ProjectileOrigin"]
 position = Vector2( 0, 2 )
+
+[node name="Laser" parent="." instance=ExtResource( 4 )]
+position = Vector2( 8, -10 )
+
+[node name="LaserIndicator" parent="." instance=ExtResource( 5 )]
+position = Vector2( 8, -10 )
+cast_to = Vector2( 67, 0 )

@@ -17,6 +17,8 @@ onready var animationState = animationTree.get("parameters/playback")
 onready var projectileOrigin = $ProjectileOrigin
 onready var projectileDirection = $ProjectileOrigin/ProjectileDirection
 onready var player = get_tree().get_current_scene().find_node("Player")
+onready var laser = $Laser
+onready var laserIndicator = $LaserIndicator
 
 onready var Projectile = preload("res://Projectile.tscn")
 
@@ -24,6 +26,7 @@ func _ready():
 	animationTree.active = true
 
 func _physics_process(_delta):
+	laserIndicator.target = player.global_position - laserIndicator.global_position
 	match state:
 		MOVE:
 			move_state(_delta)
@@ -55,6 +58,8 @@ func attack_state():
 # triggered when AttackStart animation is over
 func shoot_projectile():
 	animationState.travel("Attacking")
+	laser.target = player.global_position - laser.global_position
+	laser.is_casting = true
 	while proj_number > 0:
 		var projectile = Projectile.instance()
 		projectile.direction = player.global_position - projectileOrigin.global_position
@@ -63,6 +68,7 @@ func shoot_projectile():
 		proj_number -= 1
 		yield(get_tree().create_timer(0.5), "timeout")
 		
+	laser.is_casting = false
 	animationState.travel("AttackEnd")
 
 func _on_AttackEnd_animation_finished():
